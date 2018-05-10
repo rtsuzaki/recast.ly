@@ -1,12 +1,16 @@
 class App extends React.Component {
   constructor(props) {
+    super(props);
     this.state = {
       currentVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0]
     };
   }
-  onVideoEntryClick() {
-    this.state.currentVideo = this.props.video;
+  onVideoEntryClick(video) {
+    this.setState({
+      //currentVideos: this.state.currentVideos,
+      currentVideo: video
+    });
   }
 
   render() {
@@ -22,7 +26,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.currentVideos}/>
+            <VideoList videos={this.state.currentVideos} cb={this.onVideoEntryClick.bind(this)}/>
           </div>
         </div>
       </div>
