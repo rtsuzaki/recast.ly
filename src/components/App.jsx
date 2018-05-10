@@ -1,11 +1,33 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       currentVideos: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0],
     };
+    // window.searchYouTube({
+    // max: 5,
+    // query: 'dogs',
+    // key: window.YOUTUBE_API_KEY
+    // }, this.setInitialState.bind(this));
   }
+
+  componentDidMount() {
+    props.searchYouTube({
+      max: 5,
+      query: 'dogs',
+      key: window.YOUTUBE_API_KEY
+    }, this.setInitialState.bind(this));
+  }
+
+  setInitialState(videos) {
+    this.setState({
+      currentVideos: videos,
+      currentVideo: videos[0]
+    });
+  }
+
   onVideoEntryClick(video) {
     this.setState({
       //currentVideos: this.state.currentVideos,
@@ -20,9 +42,9 @@ class App extends React.Component {
       query: e.target.value,
       key: window.YOUTUBE_API_KEY
     };
-    window.searchYouTube(obj, this.getVideosFromYoutube.bind(this));
+    props.searchYouTube(obj, this.getVideosFromYoutube.bind(this));
   }
-  getVideosFromYoutube(videos){
+  getVideosFromYoutube(videos) {
     this.setState({
       currentVideos: videos,
       currentVideo: videos[0]

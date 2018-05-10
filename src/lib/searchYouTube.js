@@ -8,7 +8,7 @@ var searchYouTube = (options, callback) => {
       q: options.query,
       maxResults: options.max,
       key: options.key,
-      embeddable: trues
+      embeddable: true
     },
     success: function(data) {
       //videoCollection.set(data.items);
