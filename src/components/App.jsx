@@ -6,18 +6,13 @@ class App extends React.Component {
       currentVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0],
     };
-    // window.searchYouTube({
-    // max: 5,
-    // query: 'dogs',
-    // key: window.YOUTUBE_API_KEY
-    // }, this.setInitialState.bind(this));
   }
 
   componentDidMount() {
-    props.searchYouTube({
+    this.props.searchYouTube({
+      key: window.YOUTUBE_API_KEY,
+      query: 'react',
       max: 5,
-      query: 'dogs',
-      key: window.YOUTUBE_API_KEY
     }, this.setInitialState.bind(this));
   }
 
@@ -36,15 +31,14 @@ class App extends React.Component {
   }
 
   onSearchButtonClick(e) {
-    console.log(e.target.value);
     var obj = {
-      max: 5,
+      key: window.YOUTUBE_API_KEY,
       query: e.target.value,
-      key: window.YOUTUBE_API_KEY
+      max: 5,
     };
-    props.searchYouTube(obj, this.getVideosFromYoutube.bind(this));
+    this.props.searchYouTube(obj, this.getVideosFromYouTube.bind(this));
   }
-  getVideosFromYoutube(videos) {
+  getVideosFromYouTube(videos) {
     this.setState({
       currentVideos: videos,
       currentVideo: videos[0]
