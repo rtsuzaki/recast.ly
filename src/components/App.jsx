@@ -13,12 +13,28 @@ class App extends React.Component {
     });
   }
 
+  onSearchButtonClick(e) {
+    console.log(e.target.value);
+    var obj = {
+      max: 5,
+      query: e.target.value,
+      key: window.YOUTUBE_API_KEY
+    };
+    window.searchYouTube(obj, this.getVideosFromYoutube.bind(this));
+  }
+  getVideosFromYoutube(videos){
+    this.setState({
+      currentVideos: videos,
+      currentVideo: videos[0]
+    });
+  }
+
   render() {
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search cb={this.onSearchButtonClick.bind(this)}/>
           </div>
         </nav>
         <div className="row">
